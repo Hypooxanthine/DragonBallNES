@@ -1,14 +1,5 @@
-﻿  Application.cpp
-F:\Code\Projets\C++\DragonBallNES\DragonBallNES\src\Logging\Log.h(6,23): warning C4081: attendu 'constante' ; rencontré '-'
-  Log.cpp
-F:\Code\Projets\C++\DragonBallNES\DragonBallNES\src\Logging\Log.h(6,23): warning C4081: attendu 'constante' ; rencontré '-'
-  GameState.cpp
-F:\Code\Projets\C++\DragonBallNES\DragonBallNES\src\Logging\Log.h(6,23): warning C4081: attendu 'constante' ; rencontré '-'
-  MenuState.cpp
-F:\Code\Projets\C++\DragonBallNES\DragonBallNES\src\Logging\Log.h(6,23): warning C4081: attendu 'constante' ; rencontré '-'
-  State.cpp
-F:\Code\Projets\C++\DragonBallNES\DragonBallNES\src\Logging\Log.h(6,23): warning C4081: attendu 'constante' ; rencontré '-'
-  main.cpp
-F:\Code\Projets\C++\DragonBallNES\DragonBallNES\src\Logging\Log.h(6,23): warning C4081: attendu 'constante' ; rencontré '-'
+﻿  MenuState.cpp
+  Application.cpp
+  Widget.cpp
   Génération de code en cours...
   DragonBallNES.vcxproj -> F:\Code\Projets\C++\DragonBallNES\Debug\DragonBallNES.exe

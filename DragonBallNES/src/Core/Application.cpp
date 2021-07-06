@@ -18,9 +18,8 @@ void Application::run(const char* windowTitle)
 	while (m_Window->isOpen())
 	{
 		updateEvents();
-		updateStates();
+		updateState();
 		render();
-		checkState();
 		updateDt();
 	}
 }
@@ -37,12 +36,6 @@ void Application::updateEvents()
 	}
 }
 
-void Application::updateStates()
-{
-	if(isTopStateValid())
-		m_States.top()->update(m_Dt);
-}
-
 void Application::render()
 {
 	m_Window->clear();
@@ -54,22 +47,37 @@ void Application::render()
 	m_Window->display();
 }
 
-void Application::checkState()
+void Application::updateState()
 {
-	if (isTopStateValid() && m_States.top()->isPendingKill())
-		m_States.pop();
-	else if (isTopStateValid() && m_States.top()->isPushingState())
-	{
-		std::shared_ptr<State> nextState = m_States.top()->getNextState();
-		m_States.top()->resetPushedState();
+	if (isTopStateValid())
+		m_States.top()->update(m_Dt);
 
-		if (nextState != nullptr)
+	if (isTopStateValid())
+	{
+		if (m_States.top()->isPendingKill())
 		{
-			m_States.push(nextState);
-			LOG_TRACE("Pushing a new state : {}", nextState->log());
+			LOG_TRACE("Exiting state : {}", m_States.top()->log());
+			m_States.pop();
+
+			if (isTopStateValid())
+				LOG_TRACE("Active state : {}", m_States.top()->log());
+			else
+				LOG_TRACE("No active state. Exiting program.");
 		}
-		else
-			LOG_ERROR("State is pushing an invalid state.");
+		else if (m_States.top()->isPushingState())
+		{
+			std::shared_ptr<State> nextState = m_States.top()->getNextState();
+			m_States.top()->resetPushedState();
+
+			if (nextState != nullptr)
+			{
+				m_States.push(nextState);
+
+				LOG_TRACE("Pushing a new state : {}", m_States.top()->log());
+			}
+			else
+				LOG_ERROR("State is pushing an invalid state.");
+		}
 	}
 
 	if (!isTopStateValid())

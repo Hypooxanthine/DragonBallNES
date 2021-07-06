@@ -1,6 +1,7 @@
 #pragma once
 
 #include "States.h"
+#include "../UserInterface/Button.h"
 
 class MenuState : public State
 {
@@ -13,6 +14,7 @@ public: //Public methods
 	virtual std::string log() override;
 
 private: //Attributes
+	Button m_PlayButton;
 
 protected: //Protected methods
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

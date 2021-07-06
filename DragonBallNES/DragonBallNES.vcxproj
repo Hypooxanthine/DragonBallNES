@@ -145,7 +145,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Logging\Log.cpp" />
+    <ClCompile Include="src\UserInterface\Button.cpp" />
+    <ClCompile Include="src\Core\Log.cpp" />
     <ClCompile Include="src\States\GameState.cpp" />
     <ClCompile Include="src\States\MenuState.cpp" />
     <ClCompile Include="src\Core\Application.cpp" />
@@ -154,7 +155,8 @@
     <ClCompile Include="src\UserInterface\Widget.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Logging\Log.h" />
+    <ClInclude Include="src\UserInterface\Button.h" />
+    <ClInclude Include="src\Core\Log.h" />
     <ClInclude Include="src\States\GameState.h" />
     <ClInclude Include="src\Core\Application.h" />
     <ClInclude Include="src\States\MenuState.h" />

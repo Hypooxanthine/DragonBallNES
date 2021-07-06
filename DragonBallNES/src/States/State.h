@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../Logging/Log.h"
+#include "../Core/Log.h"
 
 class State : public sf::Drawable, public Loggable
 {

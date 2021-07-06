@@ -6,7 +6,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../Logging/Log.h"
+#include "Log.h"
 #include "../States/States.h"
 
 class Application
@@ -34,9 +34,8 @@ private: //Private methodes
 	/* Main loop */
 	void run(const char* windowTitle);
 	void updateEvents();
-	void updateStates();
 	void render();
-	void checkState();
+	void updateState();
 	void updateDt();
 
 	/* States */
