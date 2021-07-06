@@ -8,8 +8,9 @@ public: //Constructors
 	GameState(std::shared_ptr<sf::RenderWindow> window);
 	
 public: //Public methods
-	virtual void updateEvents(sf::Event& e) override = 0;
+	virtual void updateEvents(sf::Event& e) override;
 	virtual void update(const float& dt) override;
+	virtual std::string log() override;
 
 private: //Attributes
 

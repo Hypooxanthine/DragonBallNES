@@ -65,8 +65,8 @@ void Application::checkState()
 
 		if (nextState != nullptr)
 		{
-			LOG_INFO("Pushing a new state.");
 			m_States.push(nextState);
+			LOG_TRACE("Pushing a new state : {}", nextState->log());
 		}
 		else
 			LOG_ERROR("State is pushing an invalid state.");

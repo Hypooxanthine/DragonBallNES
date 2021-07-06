@@ -1,31 +1,18 @@
 #include "Log.h"
 
-HANDLE Log::s_Console = GetStdHandle(STD_OUTPUT_HANDLE);
+#include "spdlog/sinks/stdout_color_sinks.h"
 
-void Log::info(const char* msg) { log(msg, LogLevel::LogLevelInfo); }
+std::shared_ptr<spdlog::logger> Log::s_Logger;
 
-void Log::warning(const char* msg) { log(msg, LogLevel::LogLevelWarning); }
-
-void Log::error(const char* msg) { log(msg, LogLevel::LogLevelError); }
-
-void Log::log(const char* msg, LogLevel level)
+void Log::init()
 {
-	switch (level)
-	{
-	case LogLevel::LogLevelInfo:
-		SetConsoleTextAttribute(s_Console, LogColorInfo);
-		std::cout << "[Info] ";
-		break;
-	case LogLevel::LogLevelWarning:
-		SetConsoleTextAttribute(s_Console, LogColorWarning);
-		std::cout << "[Warning] ";
-		break;
-	case LogLevel::LogLevelError:
-		SetConsoleTextAttribute(s_Console, LogColorWarning);
-		std::cout << "[Error] ";
-		break;
-	}
+	spdlog::sink_ptr logSink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+	logSink->set_pattern("%^[%T] %n: %v%$");
 
-	std::cout << msg << std::endl;
-	SetConsoleTextAttribute(s_Console, LogColorInfo);
+
+	s_Logger = std::make_shared<spdlog::logger>("APPLICATION", logSink);
+
+	spdlog::register_logger(s_Logger);
+	s_Logger->set_level(spdlog::level::trace);
+	s_Logger->flush_on(spdlog::level::trace);
 }

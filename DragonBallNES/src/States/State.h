@@ -6,7 +6,7 @@
 
 #include "../Logging/Log.h"
 
-class State : public sf::Drawable
+class State : public sf::Drawable, public Loggable
 {
 public: //Constructors
 	State(std::shared_ptr<sf::RenderWindow> window);

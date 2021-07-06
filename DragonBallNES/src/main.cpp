@@ -2,6 +2,7 @@
 
 int main()
 {
+	Log::init();
 	Application app;
 
 	std::cin.get();
