@@ -57,16 +57,16 @@ void Application::updateState()
 	{
 		if (m_States.top()->isPendingKill())
 		{
-			LOG_TRACE("Exiting state : {}", m_States.top()->log());
+			LOG_INFO("Exiting state : {}", m_States.top()->log());
 			m_States.pop();
 
 			if (isTopStateValid())
 			{
-				LOG_TRACE("Active state : {}", m_States.top()->log());
+				LOG_INFO("Active state : {}", m_States.top()->log());
 				m_States.top()->init();
 			}
 			else
-				LOG_TRACE("No active state. Exiting program.");
+				LOG_INFO("No active state. Exiting program.");
 		}
 		else if (m_States.top()->isPushingState())
 		{
@@ -75,7 +75,7 @@ void Application::updateState()
 
 			if (nextState != nullptr)
 			{
-				LOG_TRACE("Pushing a new state : {}", m_States.top()->log());
+				LOG_INFO("Pushing a new state : {}", m_States.top()->log());
 				m_States.push(nextState);
 				m_States.top()->init();
 			}
