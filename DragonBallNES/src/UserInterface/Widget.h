@@ -19,6 +19,11 @@ public: //Public methods
 
 	bool isClicked(bool consume = true);
 
+	void setParent(std::shared_ptr<Widget> parent);
+
+	sf::Vector2f getPosition();
+	virtual void setPosition(const sf::Vector2f& pos);
+
 protected: //Protected attributes
 	std::shared_ptr<sf::RenderWindow> m_Window;
 
@@ -27,6 +32,10 @@ protected: //Protected attributes
 	bool m_Clicked;
 
 	sf::FloatRect m_Bounds;
+
+	sf::Vector2f m_Position;
+
+	std::shared_ptr<Widget> m_ParentWidget;
 
 protected: //Protected methods
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
@@ -39,6 +48,7 @@ protected: //Protected methods
 
 	bool isHovered();
 	void updateState();
+	virtual void updateRelativeParent();
 
 	sf::Vector2i getMousePosScreen();
 };

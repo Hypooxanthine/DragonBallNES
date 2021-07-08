@@ -1,6 +1,6 @@
 #include "Widget.h"
 
-Widget::Widget(std::shared_ptr<sf::RenderWindow> window) : m_Window(window)
+Widget::Widget(std::shared_ptr<sf::RenderWindow> window) : m_Window(window), m_ParentWidget(nullptr)
 {
 	m_CursorState = (isHovered() ? CursorState::StateHovered : CursorState::StateNormal);
 	m_Clicked = false;
@@ -9,6 +9,7 @@ Widget::Widget(std::shared_ptr<sf::RenderWindow> window) : m_Window(window)
 void Widget::update(const float& dt)
 {
 	updateState();
+	updateRelativeParent();
 }
 
 bool Widget::isClicked(bool consume)
@@ -30,19 +31,37 @@ bool Widget::isClicked(bool consume)
 	}
 }
 
+void Widget::setParent(std::shared_ptr<Widget> parent)
+{
+	m_ParentWidget = parent;
+}
+
+sf::Vector2f Widget::getPosition() 
+{ 
+	if (m_ParentWidget == nullptr)
+		return m_Position;
+	else
+		return m_Position + m_ParentWidget->getPosition();
+}
+
+void Widget::setPosition(const sf::Vector2f& pos) 
+{ 
+	m_Position = pos; 
+}
+
 void Widget::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 }
 
-void Widget::onHovered() { LOG_TRACE("Hovered"); }
-
-void Widget::onStopHovered() { LOG_TRACE("Stop hovered"); }
-
-void Widget::onPressed() { LOG_TRACE("Pressed"); }
-
-void Widget::onReleased() { LOG_TRACE("Released"); }
-
-void Widget::onClicked() { LOG_TRACE("Clicked"); }
+void Widget::onHovered()     {}
+							 
+void Widget::onStopHovered() {}
+							 
+void Widget::onPressed()     {}
+							 
+void Widget::onReleased()    {}
+							 
+void Widget::onClicked()     {}
 
 bool Widget::isHovered()
 {
@@ -149,6 +168,16 @@ void Widget::updateState()
 		}
 
 		break;
+	}
+}
+
+void Widget::updateRelativeParent()
+{
+	if (m_ParentWidget != nullptr)
+	{
+		setPosition(m_ParentWidget->getPosition() + getPosition());
+		m_Bounds.left = getPosition().x;
+		m_Bounds.top = getPosition().y;
 	}
 }
 

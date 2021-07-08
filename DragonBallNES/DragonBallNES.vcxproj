@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\UserInterface\PlayButton.cpp" />
     <ClCompile Include="src\UserInterface\Button.cpp" />
     <ClCompile Include="src\Core\Log.cpp" />
     <ClCompile Include="src\States\GameState.cpp" />
@@ -153,8 +154,10 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\States\State.cpp" />
     <ClCompile Include="src\UserInterface\Widget.cpp" />
+    <ClCompile Include="src\UserInterface\Text.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\UserInterface\PlayButton.h" />
     <ClInclude Include="src\UserInterface\Button.h" />
     <ClInclude Include="src\Core\Log.h" />
     <ClInclude Include="src\States\GameState.h" />
@@ -163,6 +166,7 @@
     <ClInclude Include="src\States\State.h" />
     <ClInclude Include="src\States\States.h" />
     <ClInclude Include="src\UserInterface\Widget.h" />
+    <ClInclude Include="src\UserInterface\Text.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,14 +2,10 @@
 
 Button::Button(std::shared_ptr<sf::RenderWindow> window) : Widget(window)
 {
-	m_Shape = sf::RectangleShape(sf::Vector2f(50.f, 50.f));
-	m_Shape.setPosition(200.f, 200.f);
-	m_Shape.setFillColor(sf::Color::Red);
-
-	m_Bounds = m_Shape.getGlobalBounds();
 }
 
-void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Button::setPosition(const sf::Vector2f& pos)
 {
-	target.draw(m_Shape);
+	Widget::setPosition(pos);
+	m_Shape.setPosition(getPosition());
 }
