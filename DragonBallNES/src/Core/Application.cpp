@@ -4,6 +4,7 @@ Application::Application(const char* windowTitle)
 {
 	m_Window = std::make_shared<sf::RenderWindow>();
 	m_States.push(std::make_shared<MenuState>(m_Window));
+	m_States.top()->init();
 	m_Dt = 0.f;
 
 	run(windowTitle);
@@ -60,7 +61,10 @@ void Application::updateState()
 			m_States.pop();
 
 			if (isTopStateValid())
+			{
 				LOG_TRACE("Active state : {}", m_States.top()->log());
+				m_States.top()->init();
+			}
 			else
 				LOG_TRACE("No active state. Exiting program.");
 		}
@@ -71,9 +75,9 @@ void Application::updateState()
 
 			if (nextState != nullptr)
 			{
-				m_States.push(nextState);
-
 				LOG_TRACE("Pushing a new state : {}", m_States.top()->log());
+				m_States.push(nextState);
+				m_States.top()->init();
 			}
 			else
 				LOG_ERROR("State is pushing an invalid state.");

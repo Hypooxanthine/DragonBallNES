@@ -6,7 +6,7 @@
 
 #include "../Core/Log.h"
 
-class Widget : public sf::Drawable
+class Widget : public sf::Drawable, public Loggable
 {
 public: //Enums
 	enum class CursorState { StateNormal = 0, StateHovered, StatePressed, StatePressedUnhovered, StatePressedHovered};
@@ -19,10 +19,13 @@ public: //Public methods
 
 	bool isClicked(bool consume = true);
 
-	void setParent(std::shared_ptr<Widget> parent);
+	void setParent(std::shared_ptr<Widget> parent, bool center = true);
 
-	sf::Vector2f getPosition();
-	virtual void setPosition(const sf::Vector2f& pos);
+	sf::Vector2f getAbsolutePosition();
+	sf::Vector2f getRelativePosition();
+	virtual void setRelativePosition(const sf::Vector2f& pos);
+
+	sf::Vector2f getCenter();
 
 protected: //Protected attributes
 	std::shared_ptr<sf::RenderWindow> m_Window;
@@ -36,6 +39,7 @@ protected: //Protected attributes
 	sf::Vector2f m_Position;
 
 	std::shared_ptr<Widget> m_ParentWidget;
+	bool m_Center;
 
 protected: //Protected methods
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

@@ -1,2 +1,7 @@
-﻿  PlayButton.cpp
-  DragonBallNES.vcxproj -> D:\Code\Projets\DragonBallNES\Debug\DragonBallNES.exe
+﻿  GameState.cpp
+  MenuState.cpp
+  Application.cpp
+  main.cpp
+  Text.cpp
+  Génération de code en cours...
+  DragonBallNES.vcxproj -> F:\Code\Projets\C++\DragonBallNES\Debug\DragonBallNES.exe

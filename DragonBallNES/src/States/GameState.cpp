@@ -15,11 +15,6 @@ void GameState::update(const float& dt)
 	State::update(dt);
 }
 
-std::string GameState::log()
-{
-	return "GameState";
-}
-
 void GameState::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 }

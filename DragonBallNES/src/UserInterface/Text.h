@@ -9,11 +9,15 @@ class Text : public Widget
 public: //Constructors
 	Text(std::shared_ptr<sf::RenderWindow> window);
 
-	void update(const float& dt) override;
-
 public: //Public methods
+	virtual std::string log() override { return "Text(\"" + m_Text.getString() + "\")"; }
+
+	virtual void update(const float& dt) override;
+
 	void setFont(const char* path);
 	void setText(const char* text);
+	void setColor(const sf::Color& col);
+	void setSize(const unsigned int & size);
 
 protected: //Protected attributes
 	sf::Font m_Font;
@@ -22,5 +26,7 @@ protected: //Protected attributes
 protected: //Protected methods
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	virtual void updateRelativeParent() override;
+
+	void updateBounds();
 };
 

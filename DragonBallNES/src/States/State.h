@@ -12,6 +12,9 @@ public: //Constructors
 	State(std::shared_ptr<sf::RenderWindow> window);
 
 public: //Public methods
+	/* Initialization */
+	virtual void init();
+
 	/* Updating */
 	virtual void updateEvents(sf::Event& e) = 0;
 	virtual void update(const float& dt);

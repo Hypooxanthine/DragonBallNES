@@ -31,37 +31,56 @@ bool Widget::isClicked(bool consume)
 	}
 }
 
-void Widget::setParent(std::shared_ptr<Widget> parent)
+void Widget::setParent(std::shared_ptr<Widget> parent, bool center)
 {
 	m_ParentWidget = parent;
+	m_Center = center;
 }
 
-sf::Vector2f Widget::getPosition() 
+sf::Vector2f Widget::getAbsolutePosition() 
 { 
 	if (m_ParentWidget == nullptr)
 		return m_Position;
 	else
-		return m_Position + m_ParentWidget->getPosition();
+		return m_Position + m_ParentWidget->getAbsolutePosition()
+		       + (m_Center ? m_ParentWidget->getCenter() - getCenter() : sf::Vector2f());
 }
 
-void Widget::setPosition(const sf::Vector2f& pos) 
+sf::Vector2f Widget::getRelativePosition()
+{
+	return m_Position;
+}
+
+void Widget::setRelativePosition(const sf::Vector2f& pos) 
 { 
 	m_Position = pos; 
+	m_Bounds.left = pos.x;
+	m_Bounds.top = pos.y;
+}
+
+sf::Vector2f Widget::getCenter()
+{
+	sf::Vector2f pos;
+
+	pos.x += m_Bounds.width / 2.f;
+	pos.y += m_Bounds.height / 2.f;
+
+	return pos;
 }
 
 void Widget::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 }
 
-void Widget::onHovered()     {}
+void Widget::onHovered() {}
 							 
 void Widget::onStopHovered() {}
 							 
-void Widget::onPressed()     {}
+void Widget::onPressed() {}
 							 
-void Widget::onReleased()    {}
+void Widget::onReleased() {}
 							 
-void Widget::onClicked()     {}
+void Widget::onClicked() {}
 
 bool Widget::isHovered()
 {
@@ -171,15 +190,7 @@ void Widget::updateState()
 	}
 }
 
-void Widget::updateRelativeParent()
-{
-	if (m_ParentWidget != nullptr)
-	{
-		setPosition(m_ParentWidget->getPosition() + getPosition());
-		m_Bounds.left = getPosition().x;
-		m_Bounds.top = getPosition().y;
-	}
-}
+void Widget::updateRelativeParent() {}
 
 sf::Vector2i Widget::getMousePosScreen()
 {

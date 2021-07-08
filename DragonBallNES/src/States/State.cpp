@@ -8,6 +8,11 @@ State::State(std::shared_ptr<sf::RenderWindow> window)
 	m_NextState = nullptr;
 }
 
+void State::init()
+{
+	LOG_INFO("Initialization of state {}.", log());
+}
+
 void State::update(const float& dt)
 {
 	updateMousePositions();
