@@ -9,9 +9,9 @@ Button::Button(std::shared_ptr<sf::RenderWindow> window) : Widget(window)
 	m_ActiveShape = &m_Shapes["Normal"];
 }
 
-void Button::setRelativePosition(const sf::Vector2f& pos)
+void Button::setPosition(const sf::Vector2f& pos)
 {
-	Widget::setRelativePosition(pos);
+	Widget::setPosition(pos);
 
 	for (std::pair<const std::string, sf::RectangleShape>& rs : m_Shapes)
 		rs.second.setPosition(getAbsolutePosition());

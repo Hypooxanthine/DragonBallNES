@@ -23,7 +23,7 @@ public: //Public methods
 
 	sf::Vector2f getAbsolutePosition();
 	sf::Vector2f getRelativePosition();
-	virtual void setRelativePosition(const sf::Vector2f& pos);
+	virtual void setPosition(const sf::Vector2f& pos);
 
 	sf::Vector2f getCenter();
 

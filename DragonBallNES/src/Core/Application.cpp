@@ -12,7 +12,7 @@ Application::Application(const char* windowTitle)
 
 void Application::run(const char* windowTitle)
 {
-	m_Window->create(sf::VideoMode(600, 400, 32), windowTitle);
+	m_Window->create(sf::VideoMode(600, 400, 32), windowTitle, !sf::Style::Fullscreen | !sf::Style::Resize | sf::Style::Close | sf::Style::Titlebar);
 
 	m_DtClock.restart();
 
@@ -30,7 +30,10 @@ void Application::updateEvents()
 	while (m_Window->pollEvent(m_Event))
 	{
 		if (m_Event.type == sf::Event::Closed)
+		{
+			LOG_INFO("Exiting program.");
 			m_Window->close();
+		}
 
 		if (isTopStateValid())
 			m_States.top()->updateEvents(m_Event);

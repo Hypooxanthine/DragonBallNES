@@ -16,7 +16,7 @@ public: //Public methods
 
 	virtual void update(const float& dt) override;
 
-	virtual void setRelativePosition(const sf::Vector2f& pos) override;
+	virtual void setPosition(const sf::Vector2f& pos) override;
 	void setShapeColor(sf::Color col, std::string key);
 
 protected: //Protected attributes

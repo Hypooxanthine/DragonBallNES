@@ -1,5 +1,7 @@
 #pragma once
 
+#include <map>
+
 #include "States.h"
 #include "../UserInterface/Button.h"
 #include "../UserInterface/Text.h"
@@ -16,8 +18,10 @@ public: //Public methods
 	virtual std::string log() override { return "MenuState"; };
 
 private: //Attributes
-	std::shared_ptr<Button> m_PlayButton;
-	std::shared_ptr<Text> m_PlayText;
+	std::map<std::string, std::shared_ptr<Button>> m_Buttons;
+	std::map<std::string, std::shared_ptr<Text>> m_Texts;
+
+	std::map<std::string, sf::Color> m_ButtonColors;
 
 protected: //Protected methods
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

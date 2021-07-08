@@ -51,7 +51,7 @@ sf::Vector2f Widget::getRelativePosition()
 	return m_Position;
 }
 
-void Widget::setRelativePosition(const sf::Vector2f& pos) 
+void Widget::setPosition(const sf::Vector2f& pos) 
 { 
 	m_Position = pos; 
 	m_Bounds.left = pos.x;
