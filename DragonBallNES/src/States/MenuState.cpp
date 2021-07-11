@@ -9,8 +9,11 @@ MenuState::MenuState(std::shared_ptr<sf::RenderWindow> window) : State(window)
 	m_Buttons["Play"] = std::make_shared<Button>(window);
 	m_Texts["Play"] = std::make_shared<Text>(window);
 
-	m_Buttons["Options"] = std::make_shared<Button>(window);
-	m_Texts["Options"] = std::make_shared<Text>(window);
+	m_Buttons["Settings"] = std::make_shared<Button>(window);
+	m_Texts["Settings"] = std::make_shared<Text>(window);
+
+	m_Buttons["Play"]->setCallbackFn(BIND_BUTTON_FN(MenuState::launchGame));
+	m_Buttons["Settings"]->setCallbackFn(BIND_BUTTON_FN(MenuState::launchSettings));
 }
 
 void MenuState::init()
@@ -29,17 +32,17 @@ void MenuState::init()
 	m_Texts["Play"]->setSize(30);
 	m_Texts["Play"]->setParent(m_Buttons["Play"]);
 
-	m_Buttons["Options"]->setSize(sf::Vector2f(200.f, 50.f));
-	m_Buttons["Options"]->setShapeColor(m_ButtonColors["Normal"], "Normal");
-	m_Buttons["Options"]->setShapeColor(m_ButtonColors["Hovered"], "Hovered");
-	m_Buttons["Options"]->setShapeColor(m_ButtonColors["Pressed"], "Pressed");
-	m_Buttons["Options"]->setPosition(sf::Vector2f(200, 250.f));
+	m_Buttons["Settings"]->setSize(sf::Vector2f(200.f, 50.f));
+	m_Buttons["Settings"]->setShapeColor(m_ButtonColors["Normal"], "Normal");
+	m_Buttons["Settings"]->setShapeColor(m_ButtonColors["Hovered"], "Hovered");
+	m_Buttons["Settings"]->setShapeColor(m_ButtonColors["Pressed"], "Pressed");
+	m_Buttons["Settings"]->setPosition(sf::Vector2f(200, 250.f));
 
-	m_Texts["Options"]->setFont("Resources/fonts/Chocolate_Cookies.ttf");
-	m_Texts["Options"]->setText("Options");
-	m_Texts["Options"]->setColor(sf::Color::White);
-	m_Texts["Options"]->setSize(30);
-	m_Texts["Options"]->setParent(m_Buttons["Options"]);
+	m_Texts["Settings"]->setFont("Resources/fonts/Chocolate_Cookies.ttf");
+	m_Texts["Settings"]->setText("Options");
+	m_Texts["Settings"]->setColor(sf::Color::White);
+	m_Texts["Settings"]->setSize(30);
+	m_Texts["Settings"]->setParent(m_Buttons["Settings"]);
 }
 
 void MenuState::updateEvents(sf::Event& e)
@@ -56,12 +59,6 @@ void MenuState::update(const float& dt)
 		b.second->update(dt);
 	for (std::pair<std::string, std::shared_ptr<Text>> t : m_Texts)
 		t.second->update(dt);
-
-	if (m_Buttons["Play"]->isClicked())
-		pushState(std::make_shared<GameState>(m_Window));
-
-	if (m_Buttons["Options"]->isClicked())
-		LOG_TRACE("Clicked on Options button !");
 }
 
 void MenuState::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -70,4 +67,14 @@ void MenuState::draw(sf::RenderTarget& target, sf::RenderStates states) const
 		target.draw(*b.second);
 	for (std::pair<std::string, std::shared_ptr<Text>> t : m_Texts)
 		target.draw(*t.second);
+}
+
+void MenuState::launchGame()
+{
+	pushState(std::make_shared<GameState>(m_Window));
+}
+
+void MenuState::launchSettings()
+{
+	LOG_TRACE("Clicked on Options button !");
 }

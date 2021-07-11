@@ -17,6 +17,9 @@ public: //Public methods
 	virtual void update(const float& dt) override;
 	virtual std::string log() override { return "MenuState"; };
 
+	void launchGame();
+	void launchSettings();
+
 private: //Attributes
 	std::map<std::string, std::shared_ptr<Button>> m_Buttons;
 	std::map<std::string, std::shared_ptr<Text>> m_Texts;

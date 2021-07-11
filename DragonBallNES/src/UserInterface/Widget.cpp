@@ -12,25 +12,6 @@ void Widget::update(const float& dt)
 	updateRelativeParent();
 }
 
-bool Widget::isClicked(bool consume)
-{
-	if (!consume)
-		return m_Clicked;
-	else
-	{
-		if (m_Clicked)
-		{
-			m_Clicked = false;
-			return true;
-		}
-		else
-		{
-			m_Clicked = false;
-			return false;
-		}
-	}
-}
-
 void Widget::setParent(std::shared_ptr<Widget> parent, bool center)
 {
 	m_ParentWidget = parent;

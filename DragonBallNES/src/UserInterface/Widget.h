@@ -17,8 +17,6 @@ public: //Constructors
 public: //Public methods
 	virtual void update(const float& dt);
 
-	bool isClicked(bool consume = true);
-
 	void setParent(std::shared_ptr<Widget> parent, bool center = true);
 
 	sf::Vector2f getAbsolutePosition();

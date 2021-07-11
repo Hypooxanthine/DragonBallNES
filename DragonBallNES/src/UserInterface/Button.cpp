@@ -27,10 +27,21 @@ void Button::setShapeColor(sf::Color col, std::string key)
 	}
 }
 
+void Button::setCallbackFn(const CallbackFn& fn)
+{
+	m_Callback = fn;
+}
+
 void Button::update(const float& dt)
 {
 	Widget::update(dt);
 	updateActiveShape();
+}
+
+void Button::onClicked()
+{
+	if(m_Callback != NULL)
+		m_Callback();
 }
 
 void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
