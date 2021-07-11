@@ -14,13 +14,12 @@ public: //Public methods
 
 	virtual void update(const float& dt) override;
 
-	void setFont(const char* path);
+	void setFont(const sf::Font& font);
 	void setText(const char* text);
 	void setColor(const sf::Color& col);
 	void setSize(const unsigned int & size);
 
 protected: //Protected attributes
-	sf::Font m_Font;
 	sf::Text m_Text;
 
 protected: //Protected methods

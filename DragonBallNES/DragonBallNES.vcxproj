@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\States\SettingsState.cpp" />
     <ClCompile Include="src\UserInterface\Button.cpp" />
     <ClCompile Include="src\Core\Log.cpp" />
     <ClCompile Include="src\States\GameState.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="src\UserInterface\Text.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\States\SettingsState.h" />
     <ClInclude Include="src\UserInterface\Button.h" />
     <ClInclude Include="src\Core\Log.h" />
     <ClInclude Include="src\States\GameState.h" />

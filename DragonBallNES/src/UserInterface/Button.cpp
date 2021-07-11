@@ -27,21 +27,23 @@ void Button::setShapeColor(sf::Color col, std::string key)
 	}
 }
 
-void Button::setCallbackFn(const CallbackFn& fn)
+void Button::setShapeColors(std::map<std::string, sf::Color> cols)
 {
-	m_Callback = fn;
+	for (std::pair<std::string, sf::Color> c : cols)
+	{
+		try {
+			m_Shapes.at(c.first).setFillColor(c.second);
+		}
+		catch (std::out_of_range) {
+			LOG_ERROR("\"{}\" does not match any key from Button::m_Shapes map.", c.first);
+		}
+	}
 }
 
 void Button::update(const float& dt)
 {
 	Widget::update(dt);
 	updateActiveShape();
-}
-
-void Button::onClicked()
-{
-	if(m_Callback != NULL)
-		m_Callback();
 }
 
 void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -71,6 +73,7 @@ void Button::updateActiveShape()
 
 void Button::setSize(sf::Vector2f size)
 {	
+	Widget::setPosition(size);
 	for (std::pair<const std::string, sf::RectangleShape>& rs : m_Shapes)
 		rs.second.setSize(size);
 

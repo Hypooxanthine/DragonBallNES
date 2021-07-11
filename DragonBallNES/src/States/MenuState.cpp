@@ -12,37 +12,37 @@ MenuState::MenuState(std::shared_ptr<sf::RenderWindow> window) : State(window)
 	m_Buttons["Settings"] = std::make_shared<Button>(window);
 	m_Texts["Settings"] = std::make_shared<Text>(window);
 
-	m_Buttons["Play"]->setCallbackFn(BIND_BUTTON_FN(MenuState::launchGame));
-	m_Buttons["Settings"]->setCallbackFn(BIND_BUTTON_FN(MenuState::launchSettings));
-}
-
-void MenuState::init()
-{
-	State::init();
+	m_Buttons["Play"]->setCallbackClicked(BIND_CALLBACK_FN(MenuState::launchGame));
+	m_Buttons["Settings"]->setCallbackClicked(BIND_CALLBACK_FN(MenuState::launchSettings));
 
 	m_Buttons["Play"]->setSize(sf::Vector2f(200.f, 50.f));
-	m_Buttons["Play"]->setShapeColor(m_ButtonColors["Normal"], "Normal");
-	m_Buttons["Play"]->setShapeColor(m_ButtonColors["Hovered"], "Hovered");
-	m_Buttons["Play"]->setShapeColor(m_ButtonColors["Pressed"], "Pressed");
-	m_Buttons["Play"]->setPosition(sf::Vector2f(200, 100));
+	m_Buttons["Play"]->setShapeColors(m_ButtonColors);
+	m_Buttons["Play"]->setPosition(sf::Vector2f(200.f, 100.f));
 
-	m_Texts["Play"]->setFont("Resources/fonts/Chocolate_Cookies.ttf");
 	m_Texts["Play"]->setText("Play");
 	m_Texts["Play"]->setColor(sf::Color::White);
 	m_Texts["Play"]->setSize(30);
 	m_Texts["Play"]->setParent(m_Buttons["Play"]);
 
 	m_Buttons["Settings"]->setSize(sf::Vector2f(200.f, 50.f));
-	m_Buttons["Settings"]->setShapeColor(m_ButtonColors["Normal"], "Normal");
-	m_Buttons["Settings"]->setShapeColor(m_ButtonColors["Hovered"], "Hovered");
-	m_Buttons["Settings"]->setShapeColor(m_ButtonColors["Pressed"], "Pressed");
-	m_Buttons["Settings"]->setPosition(sf::Vector2f(200, 250.f));
+	m_Buttons["Settings"]->setShapeColors(m_ButtonColors);
+	m_Buttons["Settings"]->setPosition(sf::Vector2f(200.f, 250.f));
 
-	m_Texts["Settings"]->setFont("Resources/fonts/Chocolate_Cookies.ttf");
 	m_Texts["Settings"]->setText("Options");
 	m_Texts["Settings"]->setColor(sf::Color::White);
 	m_Texts["Settings"]->setSize(30);
 	m_Texts["Settings"]->setParent(m_Buttons["Settings"]);
+
+	std::string path = "Resources/fonts/Chocolate_Cookies.ttf";
+	LOG_INFO("Loading font from \"{}\".", path);
+	if (!m_Font.loadFromFile(path))
+		LOG_ERROR("Unable to load font !");
+	else
+	{
+		LOG_INFO("Loaded font successfully.");
+		m_Texts["Play"]->setFont(m_Font);
+		m_Texts["Settings"]->setFont(m_Font);
+	}
 }
 
 void MenuState::updateEvents(sf::Event& e)
@@ -76,5 +76,5 @@ void MenuState::launchGame()
 
 void MenuState::launchSettings()
 {
-	LOG_TRACE("Clicked on Options button !");
+	pushState(std::make_shared<SettingsState>(m_Window));
 }

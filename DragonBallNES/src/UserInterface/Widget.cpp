@@ -53,20 +53,37 @@ void Widget::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 }
 
-void Widget::onHovered() {}
-							 
-void Widget::onStopHovered() {}
-							 
-void Widget::onPressed() {}
-							 
-void Widget::onReleased() {}
-							 
-void Widget::onClicked() {}
-
-bool Widget::isHovered()
+void Widget::onHovered() 
 {
-	return m_Bounds.contains((float)getMousePosScreen().x, (float)getMousePosScreen().y);
+	if (m_CallbackFns.find("Hovered") != m_CallbackFns.end())
+		m_CallbackFns["Hovered"]();
 }
+							 
+void Widget::onStopHovered()
+{
+	if (m_CallbackFns.find("StopHovered") != m_CallbackFns.end())
+		m_CallbackFns["StopHovered"]();
+}
+							 
+void Widget::onPressed()
+{
+	if (m_CallbackFns.find("Pressed") != m_CallbackFns.end())
+		m_CallbackFns["Pressed"]();
+}
+							 
+void Widget::onReleased()
+{
+	if (m_CallbackFns.find("Released") != m_CallbackFns.end())
+		m_CallbackFns["Released"]();
+}
+							 
+void Widget::onClicked()
+{
+	if (m_CallbackFns.find("Clicked") != m_CallbackFns.end())
+		m_CallbackFns["Clicked"]();
+}
+
+bool Widget::isHovered() { return m_Bounds.contains((sf::Vector2f)sf::Mouse::getPosition(*m_Window)); }
 
 void Widget::updateState()
 {

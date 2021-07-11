@@ -11,17 +11,10 @@ void Text::update(const float& dt)
 	m_Text.setPosition(getAbsolutePosition());
 }
 
-void Text::setFont(const char* path)
+void Text::setFont(const sf::Font& font)
 {
-	LOG_INFO("Loading font from \"{}\".", path);
-	if (!m_Font.loadFromFile(path))
-		LOG_ERROR("Unable to load font !");
-	else
-	{
-		LOG_INFO("Loaded font successfully.");
-		m_Text.setFont(m_Font);
-		updateBounds();
-	}
+	m_Text.setFont(font);
+	updateBounds();
 }
 
 void Text::setText(const char* text)
