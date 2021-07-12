@@ -8,8 +8,8 @@ Widget::Widget(std::shared_ptr<sf::RenderWindow> window) : m_Window(window), m_P
 
 void Widget::update(const float& dt)
 {
+	updateRelativePosition();
 	updateState();
-	updateRelativeParent();
 }
 
 void Widget::setParent(std::shared_ptr<Widget> parent, bool center)
@@ -47,6 +47,11 @@ sf::Vector2f Widget::getCenter()
 	pos.y += m_Bounds.height / 2.f;
 
 	return pos;
+}
+
+sf::FloatRect Widget::getBounds() const
+{
+	return m_Bounds;
 }
 
 void Widget::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -188,7 +193,13 @@ void Widget::updateState()
 	}
 }
 
-void Widget::updateRelativeParent() {}
+void Widget::updateRelativePosition() 
+{
+	const sf::Vector2f& pos = getAbsolutePosition();
+
+	m_Bounds.left = pos.x;
+	m_Bounds.top = pos.y;
+}
 
 sf::Vector2i Widget::getMousePosScreen()
 {

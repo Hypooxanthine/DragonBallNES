@@ -8,7 +8,6 @@ Text::Text(std::shared_ptr<sf::RenderWindow> window) : Widget(window)
 void Text::update(const float& dt)
 {
 	Widget::update(dt);
-	m_Text.setPosition(getAbsolutePosition());
 }
 
 void Text::setFont(const sf::Font& font)
@@ -37,9 +36,9 @@ void Text::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	target.draw(m_Text);
 }
 
-void Text::updateRelativeParent()
+void Text::updateRelativePosition()
 {
-	Widget::updateRelativeParent();
+	Widget::updateRelativePosition();
 	m_Text.setPosition(getAbsolutePosition());
 }
 

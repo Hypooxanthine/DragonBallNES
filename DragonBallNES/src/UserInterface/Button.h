@@ -10,7 +10,7 @@ public: //Constructors
 	Button(std::shared_ptr<sf::RenderWindow> window);
 
 public: //Public methods
-	virtual std::string log() override { return "Button"; };
+	virtual std::string log() const override { return "Button"; };
 
 	void setSize(sf::Vector2f size);
 
@@ -26,6 +26,7 @@ protected: //Protected attributes
 
 protected: //Protected methods
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+	virtual void updateRelativePosition() override;
 
 	void updateActiveShape();
 };

@@ -22,7 +22,7 @@ private:
 
 struct Loggable
 {
-	virtual std::string log() = 0;
+	virtual std::string log() const = 0;
 };
 
 #ifdef _DEBUG

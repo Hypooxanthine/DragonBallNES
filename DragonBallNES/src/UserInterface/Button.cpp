@@ -52,6 +52,14 @@ void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 		target.draw(*m_ActiveShape);
 }
 
+void Button::updateRelativePosition()
+{
+	Widget::updateRelativePosition();
+
+	for (std::pair<const std::string, sf::RectangleShape>& rs : m_Shapes)
+		rs.second.setPosition(getAbsolutePosition());
+}
+
 void Button::updateActiveShape()
 {
 	switch (m_CursorState)
@@ -73,7 +81,6 @@ void Button::updateActiveShape()
 
 void Button::setSize(sf::Vector2f size)
 {	
-	Widget::setPosition(size);
 	for (std::pair<const std::string, sf::RectangleShape>& rs : m_Shapes)
 		rs.second.setSize(size);
 

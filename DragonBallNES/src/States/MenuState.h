@@ -14,7 +14,7 @@ public: //Constructors
 public: //Public methods
 	virtual void updateEvents(sf::Event& e) override;
 	virtual void update(const float& dt) override;
-	virtual std::string log() override { return "MenuState"; };
+	virtual std::string log() const override { return "MenuState"; };
 
 	void launchGame();
 	void launchSettings();

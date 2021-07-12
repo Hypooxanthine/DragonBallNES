@@ -9,6 +9,11 @@
 //#define BIND_CALLBACK_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }
 #define BIND_CALLBACK_FN(fn) [this]() { return this->fn(); } //Seems to do the same with a void function with no argument
 
+/// <summary>
+/// Methods that have to be overriden :
+/// void draw(const sf::RenderTarget&, sf::RenderStates states) const
+/// std::string log()
+/// </summary>
 class Widget : public sf::Drawable, public Loggable
 {
 public: //Enums
@@ -27,6 +32,7 @@ public: //Public methods
 	virtual void setPosition(const sf::Vector2f& pos);
 
 	sf::Vector2f getCenter();
+	sf::FloatRect getBounds() const;
 
 	//Callback functions
 	using CallbackFn = std::function<void()>;
@@ -62,7 +68,7 @@ protected: //Protected methods
 
 	bool isHovered();
 	void updateState();
-	virtual void updateRelativeParent();
+	virtual void updateRelativePosition();
 
 	sf::Vector2i getMousePosScreen();
 

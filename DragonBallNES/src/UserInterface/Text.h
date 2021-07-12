@@ -10,7 +10,7 @@ public: //Constructors
 	Text(std::shared_ptr<sf::RenderWindow> window);
 
 public: //Public methods
-	virtual std::string log() override { return "Text(\"" + m_Text.getString() + "\")"; }
+	virtual std::string log() const override { return "Text(\"" + m_Text.getString() + "\")"; }
 
 	virtual void update(const float& dt) override;
 
@@ -24,7 +24,7 @@ protected: //Protected attributes
 
 protected: //Protected methods
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-	virtual void updateRelativeParent() override;
+	virtual void updateRelativePosition() override;
 
 	void updateBounds();
 };

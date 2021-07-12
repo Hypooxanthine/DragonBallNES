@@ -145,6 +145,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Core\Math.cpp" />
+    <ClCompile Include="src\UserInterface\SliderBar.cpp" />
     <ClCompile Include="src\States\SettingsState.cpp" />
     <ClCompile Include="src\UserInterface\Button.cpp" />
     <ClCompile Include="src\Core\Log.cpp" />
@@ -157,6 +159,8 @@
     <ClCompile Include="src\UserInterface\Text.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Core\Math.h" />
+    <ClInclude Include="src\UserInterface\SliderBar.h" />
     <ClInclude Include="src\States\SettingsState.h" />
     <ClInclude Include="src\UserInterface\Button.h" />
     <ClInclude Include="src\Core\Log.h" />
